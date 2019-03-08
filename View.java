@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * View: Contains everything about graphics and images
@@ -17,21 +19,16 @@ import javax.imageio.ImageIO;
  **/
 
 
-public class View {
-	int width;
-	int height;
+public class View extends JFrame {
+	
+	final static int frameWidth = 500;
+    final static int frameHeight = 300;
     final static int imgWidth = 165;
-    final static int imgHeight = 165;
-	BufferedImage[][] pics;
-	final int frameCount = 10;
-	
-	//TODO + change params
-	public void update(int x, int y, Object direct) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+    final static int imgHeight = 165; 
+    final int frameCount = 10;
+
     public View(){
+    	BufferedImage[][] pics;
         String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
         BufferedImage[] img = createImage(arrOfStr);
@@ -44,16 +41,14 @@ public class View {
             }
             count ++;
         }
- 
-    }   
-	
-	private BufferedImage[] createImage(String[] strArr){
+    }  
+    
+    private BufferedImage[] createImage(String[] strArr){
         BufferedImage[] bufferedImage = new BufferedImage[strArr.length];
         String path = "orc_animation/orc_";
         int count = 0;
         for (String str : strArr) {
             try {
-                
                 bufferedImage[count] = ImageIO.read(new File(path.concat(str).concat(".png")));
                 count ++;
             } catch (IOException e) {
@@ -62,42 +57,28 @@ public class View {
         }
         return bufferedImage;
     }
+    
+	public void update(int currX, int currY, int dir) {
+	}
+
+	public static int getFramewidth() {
+		return frameWidth;
+	}
+
+	public static int getFrameheight() {
+		return frameHeight;
+	}
+
+	public static int getImageWidth() {
+		return imgWidth;
+	}
+
+	public static int getImageHeight() {
+		return imgHeight;
+	}
 	
-    public void imageDraw(Graphics g,int dir,int xNeg,int yNeg) {
-    	g.drawImage(pics[picNum][dir], xloc+=xNeg*xIncr, yloc+=yNeg*yIncr, Color.blue, this);
-    }
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public int getImageWidth() {
-		return imageWidth;
-	}
-
-	public void setImageWidth(int imageWidth) {
-		this.imageWidth = imageWidth;
-	}
-
-	public int getImageHeight() {
-		return imageHeight;
-	}
-
-	public void setImageHeight(int imageHeight) {
-		this.imageHeight = imageHeight;
-	}
-
 	
 }
+
+//view.update(model.getX(), model.getY(), model.getDirect());
+//}
