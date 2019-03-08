@@ -19,15 +19,19 @@ import javax.swing.JPanel;
  **/
 
 
-public class View extends JFrame {
+public class View extends JPanel {
 	
 	final static int frameWidth = 500;
     final static int frameHeight = 300;
     final static int imgWidth = 165;
     final static int imgHeight = 165; 
+    JFrame frame;
+    Model model;
+    int picNum = 0;
     final int frameCount = 10;
 
-    public View(){
+    public View(JFrame frame){
+    	this.frame = frame;
     	BufferedImage[][] pics;
         String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
@@ -59,13 +63,23 @@ public class View extends JFrame {
     }
     
 	public void update(int currX, int currY, int dir) {
+		picNum = (picNum + 1) % frameCount;
+		frame.repaint();
 	}
+	
+	public void paint(Graphics g) {
+		imageDraw(g,model.getDirect(),model.getXChg(),model.getYChg());
+	}
+	
+	public void imageDraw(Graphics g,int dir,int xNeg,int yNeg) {
+    	g.drawImage(pics[picNum][dir], xloc+=xNeg*xIncr, yloc+=yNeg*yIncr, Color.blue, this);
+    }
 
-	public static int getFramewidth() {
+	public int getWidth() {
 		return frameWidth;
 	}
 
-	public static int getFrameheight() {
+	public int getHeight() {
 		return frameHeight;
 	}
 

@@ -21,7 +21,10 @@ public class Model {
 	int imgHeight;
 	int xloc = 0;
 	int yloc = 0;
+    int xChg = 1;
+    int yChg = 1;
 	int dir = 3;
+	View view;
 	
 	Model(int width,int height,int imgWidth,int imgHeight) {
 		this.width = width;
@@ -31,7 +34,42 @@ public class Model {
 	}
 	
 	public void updateLocationAndDirection() {
-		//TODO
+		if(xloc > (width - imgWidth) || xloc < 0) {
+        	switch(dir) {
+	        	case 1:
+	        		dir = 7;
+	        		break;
+	        	case 3:
+	        		dir = 5;
+	        		break;
+	        	case 5:
+	        		dir = 3;
+	        		break;
+	        	case 7:
+	        		dir = 1;
+	        		break;
+        	}
+        	xChg = -1*xChg;
+        	
+        }
+        if(yloc > (height - imgHeight) || yloc < 0) {
+
+        	yChg = -1*yChg;
+        	switch(dir) {
+        		case 1:
+        			dir = 3;
+        			break;
+        		case 3:
+        			dir = 1;
+        			break;
+        		case 5:
+        			dir = 7;
+        			break;
+        		case 7:
+        			dir = 5;
+        			break;
+        	}
+        }
 	}
 
 	public int getWidth() {
@@ -62,6 +100,12 @@ public class Model {
 		return dir;
 	}
 	
+	public int getXChg() {
+		return xChg;
+	}
 	
+	public int getYChg() {
+		return yChg;
+	}
 	
 }

@@ -10,7 +10,7 @@ public class Main extends JPanel{
 	    final int frameWidth = 500;
 	    final int frameHeight = 300;
 		JFrame frame = new JFrame();
-        frame.getContentPane().add(new View());
+        frame.getContentPane().add(new View(frame));
         frame.setBackground(Color.gray);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
