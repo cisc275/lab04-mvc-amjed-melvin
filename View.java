@@ -25,14 +25,16 @@ public class View extends JPanel {
     final static int frameHeight = 300;
     final static int imgWidth = 165;
     final static int imgHeight = 165; 
+    final int xIncr = 8;
+    final int yIncr = 2;
     JFrame frame;
+	BufferedImage[][] pics;
     Model model;
     int picNum = 0;
     final int frameCount = 10;
 
     public View(JFrame frame){
     	this.frame = frame;
-    	BufferedImage[][] pics;
         String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
         BufferedImage[] img = createImage(arrOfStr);
@@ -47,7 +49,11 @@ public class View extends JPanel {
         }
     }  
     
-    private BufferedImage[] createImage(String[] strArr){
+    public View() {
+		// TODO Auto-generated constructor stub
+	}
+
+	private BufferedImage[] createImage(String[] strArr){
         BufferedImage[] bufferedImage = new BufferedImage[strArr.length];
         String path = "orc_animation/orc_";
         int count = 0;
@@ -68,12 +74,8 @@ public class View extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
-		imageDraw(g,model.getDirect(),model.getXChg(),model.getYChg());
+		model.imageDraw(g,model.getDirect(),model.getXChg(),model.getYChg(), xIncr, yIncr);
 	}
-	
-	public void imageDraw(Graphics g,int dir,int xNeg,int yNeg) {
-    	g.drawImage(pics[picNum][dir], xloc+=xNeg*xIncr, yloc+=yNeg*yIncr, Color.blue, this);
-    }
 
 	public int getWidth() {
 		return frameWidth;
@@ -91,6 +93,13 @@ public class View extends JPanel {
 		return imgHeight;
 	}
 	
+	public BufferedImage[][] getPics() {
+		return pics;
+	}
+	
+	public int getPicNum() {
+		return picNum;
+	}
 	
 }
 

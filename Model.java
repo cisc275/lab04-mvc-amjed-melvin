@@ -1,4 +1,6 @@
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.ImageObserver;
 
 import javax.swing.JPanel;
 
@@ -71,7 +73,11 @@ public class Model {
         	}
         }
 	}
-
+	
+	public void imageDraw(Graphics g,int dir,int xNeg,int yNeg, int xIncr, int yIncr) {
+    	g.drawImage(view.getPics()[view.getPicNum()][dir], xloc+=xNeg*xIncr, yloc+=yNeg*yIncr, Color.blue, (ImageObserver) this);
+    }
+	
 	public int getWidth() {
 		return width;
 	}
