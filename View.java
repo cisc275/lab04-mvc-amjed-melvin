@@ -7,7 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 /**
  * View: Contains everything about graphics and images
  * Know size of world, which images to load etc
@@ -21,6 +20,10 @@ import javax.swing.JPanel;
 
 public class View extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	final static int frameWidth = 500;
     final static int frameHeight = 300;
     final static int imgWidth = 165;
@@ -28,12 +31,16 @@ public class View extends JPanel {
     final int xIncr = 8;
     final int yIncr = 2;
     JFrame frame;
+	int currX;
+	int currY;
+	int direc;
 	BufferedImage[][] pics;
     Model model;
     int picNum = 0;
     final int frameCount = 10;
 
     public View(JFrame frame){
+    	model = new Model(frameWidth, frameHeight, imgWidth, imgHeight);
     	this.frame = frame;
         String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
@@ -69,14 +76,29 @@ public class View extends JPanel {
     }
     
 	public void update(int currX, int currY, int dir) {
+		//System.out.println("im entering update");
 		picNum = (picNum + 1) % frameCount;
-		frame.repaint();
+		this.currX = currX;
+		this.currY = currY;
+		this.direc = dir;
+		//System.out.println("im leaving update");
 	}
 	
 	public void paint(Graphics g) {
-		model.imageDraw(g,model.getDirect(),model.getXChg(),model.getYChg(), xIncr, yIncr);
-	}
 
+		model.updateLocationAndDirection();
+		//System.out.println("im in paint");
+    	g.drawImage(pics[picNum][model.getDirect()], currX+=(model.getXChg())*xIncr, currY+=(model.getYChg())*yIncr, Color.gray, this);
+    	//System.out.println("I'm leaving paint");
+    	//model.imageDraw(g,model.getDirect(),model.getXChg(),model.getYChg(), xIncr, yIncr);
+    	frame.repaint();
+	}
+	public int getCurrX() {
+		return currX;
+	}
+	public int getCurrY() {
+		return currY;
+	}
 	public int getWidth() {
 		return frameWidth;
 	}

@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.ImageObserver;
 
 import javax.swing.JPanel;
 
@@ -15,14 +14,18 @@ import javax.swing.JPanel;
  * provide location
  **/
 
-public class Model {
+public class Model extends JPanel {
 	
-	int width;
-	int height;
-	int imgWidth;
-	int imgHeight;
-	int xloc = 0;
-	int yloc = 0;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	int width = 500;
+	int height = 300;
+	int imgWidth = 165;
+	int imgHeight = 165;
+	int xloc;
+	int yloc;
     int xChg = 1;
     int yChg = 1;
 	int dir = 3;
@@ -33,9 +36,15 @@ public class Model {
 		this.height = height;
 		this.imgWidth = imgWidth;
 		this.imgHeight = imgHeight;
+		view = new View();
+		xloc = 0;
+		yloc = 0;
 	}
 	
 	public void updateLocationAndDirection() {
+		xloc = view.getCurrX()+8;
+		yloc = view.getCurrY()+2;
+		System.out.println(xloc);
 		if(xloc > (width - imgWidth) || xloc < 0) {
         	switch(dir) {
 	        	case 1:
@@ -51,6 +60,7 @@ public class Model {
 	        		dir = 1;
 	        		break;
         	}
+        	
         	xChg = -1*xChg;
         	
         }
@@ -74,9 +84,9 @@ public class Model {
         }
 	}
 	
-	public void imageDraw(Graphics g,int dir,int xNeg,int yNeg, int xIncr, int yIncr) {
-    	g.drawImage(view.getPics()[view.getPicNum()][dir], xloc+=xNeg*xIncr, yloc+=yNeg*yIncr, Color.blue, (ImageObserver) this);
-    }
+	/*public void imageDraw(Graphics g,int dir,int xNeg,int yNeg, int xIncr, int yIncr) {
+    	g.drawImage(view.getPics()[view.getPicNum()][dir], xloc+=xNeg*xIncr, yloc+=yNeg*yIncr, Color.blue, this);
+    }*/
 	
 	public int getWidth() {
 		return width;
