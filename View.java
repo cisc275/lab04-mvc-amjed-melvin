@@ -31,9 +31,11 @@ public class View extends JPanel {
     final int xIncr = 8;
     final int yIncr = 2;
     JFrame frame;
-	int currX;
-	int currY;
-	int direc;
+	static int currX;
+	static int currY;
+	static int x;
+	static int y;
+	static int direc;
 	BufferedImage[][] pics;
     Model model;
     int picNum = 0;
@@ -75,13 +77,14 @@ public class View extends JPanel {
         return bufferedImage;
     }
     
-	public void update(int currX, int currY, int dir) {
+	public void update(int currX, int currY, int dir, Model model) {
 		//System.out.println("im entering update");
 		picNum = (picNum + 1) % frameCount;
-		this.currX = currX;
+		this.currX = currX + 8;
+		x = x + xIncr*model.getXChg();
+		y = y + yIncr*model.getYChg();
 		this.currY = currY;
 		this.direc = dir;
-		//System.out.println("im leaving update");
 	}
 	
 	public void paint(Graphics g) {
@@ -98,6 +101,12 @@ public class View extends JPanel {
 	}
 	public int getCurrY() {
 		return currY;
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
 	}
 	public int getWidth() {
 		return frameWidth;

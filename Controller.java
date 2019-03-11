@@ -19,7 +19,7 @@ public class Controller {
 			//System.out.println("Checkpoint 2\n");
 			model.updateLocationAndDirection();
 			//update the view
-			view.update(model.getX(), model.getY(), model.getDirect());
+			view.update(model.getX(), model.getY(), model.getDirect(), model);
 		}
 	}
 }

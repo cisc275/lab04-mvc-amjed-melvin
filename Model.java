@@ -24,11 +24,11 @@ public class Model extends JPanel {
 	int height = 300;
 	int imgWidth = 165;
 	int imgHeight = 165;
-	int xloc;
-	int yloc;
-    int xChg = 1;
-    int yChg = 1;
-	int dir = 3;
+	static int xloc;
+	static int yloc;
+    static int xChg = 1;
+    static int yChg = 1;
+	static int dir = 3;
 	View view;
 	
 	Model(int width,int height,int imgWidth,int imgHeight) {
@@ -42,9 +42,10 @@ public class Model extends JPanel {
 	}
 	
 	public void updateLocationAndDirection() {
-		xloc = view.getCurrX()+8;
-		yloc = view.getCurrY()+2;
+		xloc = view.getX();
+		yloc = view.getY();
 		System.out.println(xloc);
+		
 		if(xloc > (width - imgWidth) || xloc < 0) {
         	switch(dir) {
 	        	case 1:
