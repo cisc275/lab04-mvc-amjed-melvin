@@ -44,7 +44,7 @@ public class Model extends JPanel {
 	public void updateLocationAndDirection() {
 		xloc = view.getX();
 		yloc = view.getY();
-		System.out.println(xloc);
+		//System.out.println(xloc);
 		
 		if(xloc > (width - imgWidth) || xloc < 0) {
         	switch(dir) {
