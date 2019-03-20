@@ -35,13 +35,12 @@ public class Model {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("MAIN");
+		System.out.println("STARTING POINT");
 		Controller ctrl = new Controller();
 		ctrl.start();
 	}
 	
 	public void updateLocationAndDirection() {
-		//System.out.println("model: updateLocAndDir");
 		picNum = (picNum + 1) % View.getFrameCount();
         if(x > (frameWidth - View.getImageWidth()) || x < 0) {
         	switch(dir) {
@@ -81,11 +80,9 @@ public class Model {
         }
         x += xChg*xIncr;
         y += yChg*yIncr;
-        //View.paint();
-       // imageDraw(g,dir,xChg,yChg);
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println("Dir " + dir);
+        //System.out.println(x);
+        //System.out.println(y);
+        //System.out.println("Dir " + dir);
 	}
 	
 	public int getX() { return x; }
