@@ -47,7 +47,8 @@ public class View extends JPanel {
 		
 		JFrame frame = new JFrame();
         frame.getContentPane().add(this);
-        frame.setBackground(Color.gray);
+        frame.getContentPane().setBackground(Color.RED);
+        //TODO : this doesn't work.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
         frame.setVisible(true);
@@ -83,7 +84,7 @@ public class View extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(pics[Model.getPicNum()][dir], x, y, Color.gray, this);
+		g.drawImage(pics[Model.getPicNum()][dir], x, y, Color.blue, this);
 	}
 	
 	public int getWidth() {
