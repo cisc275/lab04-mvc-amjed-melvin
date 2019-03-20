@@ -87,23 +87,13 @@ public class View extends JPanel {
 		g.drawImage(pics[Model.getPicNum()][dir], x, y, Color.blue, this);
 	}
 	
-	public int getWidth() {
-		return frameWidth;
-	}
+	public int getWidth() { return frameWidth; }
 	
-	public int getHeight() {
-		return frameHeight;
-	}
+	public int getHeight() { return frameHeight; }
 	
-	public static int getImageWidth() {
-		return orcWidth;
-	}
+	public static int getImageWidth() { return orcWidth; }
 	
-	public static int getImageHeight() {
-		return orcHeight;
-	}
+	public static int getImageHeight() { return orcHeight; }
 	
-	public static int getFrameCount() {
-		return frameCount;
-	}
+	public static int getFrameCount() { return frameCount; }
 }
