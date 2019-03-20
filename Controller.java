@@ -8,7 +8,7 @@ public class Controller {
 	
 	public Controller(){
 		view = new View();
-		model = new Model(view.getWidth(), view.getHeight(), View.getImageWidth(), View.getImageHeight());
+		model = new Model(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
 	}
 	
         //run the simulation
@@ -16,10 +16,9 @@ public class Controller {
 		for(int i = 0; i < 5000; i++)
 		{
 			//increment the x and y coordinates, alter direction if necessary
-			//System.out.println("Checkpoint 2\n");
 			model.updateLocationAndDirection();
 			//update the view
-			view.update(model.getX(), model.getY(), model.getDirect(), model);
+			view.update(model.getX(), model.getY(), model.getDirect());
 		}
 	}
 }

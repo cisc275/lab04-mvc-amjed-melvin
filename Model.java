@@ -1,7 +1,3 @@
-import java.awt.Color;
-import java.awt.Graphics;
-
-import javax.swing.JPanel;
 
 /**
  * Model: Contains all the state and logic
@@ -14,39 +10,40 @@ import javax.swing.JPanel;
  * provide location
  **/
 
-public class Model extends JPanel {
+public class Model {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	int width = 500;
-	int height = 300;
-	int imgWidth = 165;
-	int imgHeight = 165;
-	static int xloc;
-	static int yloc;
-    static int xChg = 1;
-    static int yChg = 1;
-	static int dir = 3;
-	View view;
+
+	int x;
+	int y;
+	int dir = 3;
+    int xChg = 1;
+    int yChg = 1;
+	static int picNum = 0;
+	final int xIncr = 8;
+    final int yIncr = 2;
+	int orcWidth = 165;
+	int orcHeight = 165;
+    int frameWidth = 500;
+    int frameHeight = 300;
 	
-	Model(int width,int height,int imgWidth,int imgHeight) {
-		this.width = width;
-		this.height = height;
-		this.imgWidth = imgWidth;
-		this.imgHeight = imgHeight;
-		view = new View();
-		xloc = 0;
-		yloc = 0;
+	public Model(int frameWidth,int frameHeight, int orcWidth, int orcHeight) {
+		this.orcWidth = orcWidth;
+		this.orcHeight = orcHeight;
+		this.frameWidth = frameWidth;
+		this.frameHeight = frameHeight;
+		
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("MAIN");
+		Controller ctrl = new Controller();
+		ctrl.start();
 	}
 	
 	public void updateLocationAndDirection() {
-		xloc = view.getX();
-		yloc = view.getY();
-		//System.out.println(xloc);
-		
-		if(xloc > (width - imgWidth) || xloc < 0) {
+		//System.out.println("model: updateLocAndDir");
+		picNum = (picNum + 1) % View.getFrameCount();
+        if(x > (frameWidth - View.getImageWidth()) || x < 0) {
         	switch(dir) {
 	        	case 1:
 	        		dir = 7;
@@ -61,11 +58,10 @@ public class Model extends JPanel {
 	        		dir = 1;
 	        		break;
         	}
-        	
         	xChg = -1*xChg;
         	
         }
-        if(yloc > (height - imgHeight) || yloc < 0) {
+        if(y > (frameHeight - View.getImageHeight()) || y < 0) {
 
         	yChg = -1*yChg;
         	switch(dir) {
@@ -83,46 +79,23 @@ public class Model extends JPanel {
         			break;
         	}
         }
+        x += xChg*xIncr;
+        y += yChg*yIncr;
+        //View.paint();
+       // imageDraw(g,dir,xChg,yChg);
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println("Dir " + dir);
 	}
 	
-	/*public void imageDraw(Graphics g,int dir,int xNeg,int yNeg, int xIncr, int yIncr) {
-    	g.drawImage(view.getPics()[view.getPicNum()][dir], xloc+=xNeg*xIncr, yloc+=yNeg*yIncr, Color.blue, this);
-    }*/
+	public int getX() { return x; }
 	
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public int getImgWidth() {
-		return imgWidth;
-	}
-
-	public int getImgHeight() {
-		return imgHeight;
-	}
-
-	public int getX() {
-		return xloc;
-	}
-
-	public int getY() {
-		return yloc;
-	}
-
-	public int getDirect() {
-		return dir;
-	}
+	public int getY() { return y; }
 	
-	public int getXChg() {
-		return xChg;
-	}
+	public int getDirect() { return dir; }
 	
-	public int getYChg() {
-		return yChg;
-	}
+	public static int getPicNum() { return picNum; }
+
+
 	
 }
