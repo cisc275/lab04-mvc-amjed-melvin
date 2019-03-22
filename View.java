@@ -47,7 +47,7 @@ public class View extends JPanel {
 	
 	BufferedImage[][] pics;
 	
-	public View() {
+	public View() { //ENUM FILE
 		//TODO switch to enumerated type
 		String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
