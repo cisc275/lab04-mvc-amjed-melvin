@@ -25,7 +25,9 @@ public class Model {
 	int orcHeight = 165;
     int frameWidth = 500;
     int frameHeight = 300;
-	
+    Direction direction = Direction.SOUTHEAST;
+    
+
 	public Model(int frameWidth,int frameHeight, int orcWidth, int orcHeight) {
 		this.orcWidth = orcWidth;
 		this.orcHeight = orcHeight;
@@ -41,21 +43,21 @@ public class Model {
 	}
 	
 	public void updateLocationAndDirection() {
-		//TODO switch to enumerated type
+		//TODO switch to enumerated type ***BRANCH FIRST****
 		picNum = (picNum + 1) % View.getFrameCount();
         if(x > (frameWidth - View.getImageWidth()) || x < 0) {
-        	switch(dir) {
-	        	case 1:
-	        		dir = 7;
+        	switch(direction) {
+	        	case NORTHEAST:
+	        		direction = Direction.NORTHWEST;
 	        		break;
-	        	case 3:
-	        		dir = 5;
+	        	case SOUTHEAST:
+	        		direction = Direction.SOUTHWEST;
 	        		break;
-	        	case 5:
-	        		dir = 3;
+	        	case SOUTHWEST:
+	        		direction = Direction.SOUTHEAST;
 	        		break;
-	        	case 7:
-	        		dir = 1;
+	        	case NORTHWEST:
+	        		direction = Direction.NORTHEAST;
 	        		break;
         	}
         	xChg = -1*xChg;
@@ -64,23 +66,24 @@ public class Model {
         if(y > (frameHeight - View.getImageHeight()) || y < 0) {
 
         	yChg = -1*yChg;
-        	switch(dir) {
-        		case 1:
-        			dir = 3;
+        	switch(direction) {
+        		case NORTHEAST:
+        			direction = Direction.SOUTHEAST;
         			break;
-        		case 3:
-        			dir = 1;
+        		case SOUTHEAST:
+        			direction = Direction.NORTHEAST;
         			break;
-        		case 5:
-        			dir = 7;
+        		case SOUTHWEST:
+        			direction = Direction.NORTHWEST;
         			break;
-        		case 7:
-        			dir = 5;
+        		case NORTHWEST:
+        			direction = Direction.SOUTHWEST;;
         			break;
         	}
         }
         x += xChg*xIncr;
         y += yChg*yIncr;
+        //System.out.println(direction.getHierarchy());
         //System.out.println(x);
         //System.out.println(y);
         //System.out.println("Dir " + dir);
@@ -90,7 +93,7 @@ public class Model {
 	
 	public int getY() { return y; }
 	
-	public int getDirect() { return dir; }
+	public Direction getDirect() { return direction; }
 	
 	public static int getPicNum() { return picNum; }
 

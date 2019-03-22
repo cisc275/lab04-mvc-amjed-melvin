@@ -35,7 +35,7 @@ public class View extends JPanel {
 	
 	int x;
 	int y;
-	int dir;
+	Direction dir;
 	
 	JButton btn = new JButton("Start/Stop");
 	private static final int btn_x = 300; // location x 
@@ -52,7 +52,7 @@ public class View extends JPanel {
 		String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
         BufferedImage[] img = createImage(arrOfStr);
-        pics = new BufferedImage[10][arrOfStr.length];
+        pics = new BufferedImage[frameCount][arrOfStr.length];
         int count = 0;
         for (BufferedImage curImg : img) {
             for(int i = 0; i < frameCount; i++) {
@@ -89,7 +89,7 @@ public class View extends JPanel {
         return bufferedImage;
     }
 	
-	public void update(int x, int y, int dir) {
+	public void update(int x, int y, Direction dir) {
 		//System.out.println("view update");
 		this.x = x;
 		this.y = y;
@@ -103,7 +103,7 @@ public class View extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(pics[Model.getPicNum()][dir], x, y, Color.GRAY, this);
+		g.drawImage(pics[Model.getPicNum()][dir.getHierarchy()], x, y, Color.GRAY, this);
 	}
 	
 	public int getWidth() { return frameWidth; }
