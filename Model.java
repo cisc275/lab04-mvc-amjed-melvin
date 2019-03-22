@@ -41,6 +41,7 @@ public class Model {
 	}
 	
 	public void updateLocationAndDirection() {
+		//TODO switch to enumerated type
 		picNum = (picNum + 1) % View.getFrameCount();
         if(x > (frameWidth - View.getImageWidth()) || x < 0) {
         	switch(dir) {

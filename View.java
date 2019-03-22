@@ -8,6 +8,8 @@
  * load images for all direction (an image should only be loaded once!!! why?)
  **/
 import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.AbstractButton;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,6 +17,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+//
+import javax.swing.ImageIcon;
+ 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+//
 
 public class View extends JPanel {
 	
@@ -27,16 +37,22 @@ public class View extends JPanel {
 	int y;
 	int dir;
 	
+	JButton btn = new JButton("Start/Stop");
+	private static final int btn_x = 300; // location x 
+	private static final int btn_y = 50;  // location y 
+	private static final int btn_width = 140;
+	private static final int btn_height = 50; 
+	
 	final static int frameCount = 10;
 	
 	BufferedImage[][] pics;
 	
 	public View() {
+		//TODO switch to enumerated type
 		String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
         BufferedImage[] img = createImage(arrOfStr);
         pics = new BufferedImage[10][arrOfStr.length];
-        //System.out.println(img.length);
         int count = 0;
         for (BufferedImage curImg : img) {
             for(int i = 0; i < frameCount; i++) {
@@ -47,11 +63,14 @@ public class View extends JPanel {
 		
 		JFrame frame = new JFrame();
         frame.getContentPane().add(this);
-        frame.getContentPane().setBackground(Color.RED);
+       // frame.getContentPane().setBackground(Color.RED);
+        this.setBackground(Color.GRAY);
         //TODO : this doesn't work.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
         frame.setVisible(true);
+        //btn.setBounds(btn_x, btn_y, btn_width, btn_height);
+        //frame.getContentPane().add(btn);
 	}
 	
     private BufferedImage[] createImage(String[] strArr){
@@ -71,7 +90,7 @@ public class View extends JPanel {
     }
 	
 	public void update(int x, int y, int dir) {
-		System.out.println("view update");
+		//System.out.println("view update");
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
@@ -84,7 +103,7 @@ public class View extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(pics[Model.getPicNum()][dir], x, y, Color.blue, this);
+		g.drawImage(pics[Model.getPicNum()][dir], x, y, Color.GRAY, this);
 	}
 	
 	public int getWidth() { return frameWidth; }
